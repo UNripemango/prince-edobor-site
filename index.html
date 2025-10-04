@@ -16,22 +16,26 @@
     gtag('config', 'G-XXXXXXXXXX');
   </script>
   <script>
-document.querySelector("form").addEventListener("submit", function (e) {
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
     const phoneInput = document.getElementById("phone");
     const errorMsg = document.getElementById("phone-error");
-    const phoneValue = phoneInput.value.trim();
 
-    // Regex for flexible phone formats
-    const phoneRegex = /^(\+?\d{1,2}\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/;
+    form.addEventListener("submit", function (e) {
+      const phoneValue = phoneInput.value.trim();
 
-    if (!phoneRegex.test(phoneValue)) {
-      e.preventDefault(); // Stop form submission
-      errorMsg.classList.remove("hidden");
-      phoneInput.classList.add("border-red-500");
-    } else {
-      errorMsg.classList.add("hidden");
-      phoneInput.classList.remove("border-red-500");
-    }
+      // Regex for flexible phone formats
+      const phoneRegex = /^(\+?\d{1,2}\s?)?(\(?\d{3}\)?[\s.-]?)?\d{3}[\s.-]?\d{4}$/;
+
+      if (!phoneRegex.test(phoneValue)) {
+        e.preventDefault(); // Stop form submission
+        errorMsg.classList.remove("hidden");
+        phoneInput.classList.add("border-red-500");
+      } else {
+        errorMsg.classList.add("hidden");
+        phoneInput.classList.remove("border-red-500");
+      }
+    });
   });
 </script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -99,7 +103,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
     name="Phone Number"
     required
     class="w-full border border-gray-300 rounded px-4 py-2"
-    placeholder="e.g., (xxx) xxx-xxxx"
+    placeholder="e.g., (587) 500-6714"
   />
   <p id="phone-error" class="text-red-600 text-sm mt-1 hidden">Please enter a valid phone number.</p>
 </div>
